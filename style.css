@@ -1,0 +1,393 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #1f2937;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.title {
+  text-align: center;
+  font-size: 42px;
+  margin-top: 40px;
+}
+
+.status {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 20px;
+}
+
+.values-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 66%;
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.value-box {
+  flex: 1;
+  height: 450px;
+  text-align: center;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 24px 20px 20px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.value-box h2 {
+  margin: 0 0 20px 0;
+  font-size: 28px;
+}
+
+.bar-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.bar-track {
+  width: 100px;
+  height: 240px;
+  background: #e5e7eb;
+  border-radius: 20px;
+  position: relative; /* important for labels */
+  overflow: visible;  /* allow labels outside */
+  display: flex;
+  align-items: flex-end;
+}
+
+.bar-stage-label {
+  position: absolute;
+  left: 110%;
+}
+
+.bar-fill {
+  width: 100%;
+  height: 0%;
+  border-radius: 20px;
+  transition: height 0.3s ease, background-color 0.3s ease;
+  z-index: 1;
+}
+
+#ppm,
+#ntu {
+  font-size: 56px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.usage-box {
+  justify-content: flex-start;
+}
+
+.jug-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.jug-outline {
+  position: relative;
+  width: 130px;
+  height: 240px;
+  border: 6px solid #9ca3af;
+  border-top: 12px solid #9ca3af;
+  border-radius: 20px 20px 28px 28px;
+  background: #f9fafb;
+  overflow: hidden;
+}
+
+.jug-outline::before {
+  content: "";
+  position: absolute;
+  top: -28px;
+  left: 35px;
+  width: 50px;
+  height: 28px;
+  border: 6px solid #9ca3af;
+  border-bottom: none;
+  border-radius: 16px 16px 0 0;
+  background: #f9fafb;
+}
+
+.jug-fill {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  transition: height 0.3s ease, bottom 0.3s ease;
+}
+
+.stage2-fill {
+  background: #3b82f6;
+  height: 0%;
+  z-index: 3;
+}
+
+.stage3-fill {
+  background: #22c55e;
+  height: 0%;
+  z-index: 2;
+}
+
+.wastewater-fill {
+  background: #6b7280;
+  height: 0%;
+  z-index: 1;
+}
+
+.jug-legend {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+.jug-legend span[id$="-percent"] {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.legend-row{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+}
+
+.jug-legend div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin: 3px 0;
+  font-size: 13px;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.stage2-color {
+  background: #3b82f6;
+}
+
+.stage3-color {
+  background: #22c55e;
+}
+
+.wastewater-color {
+  background: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bottom-container {
+  position: absolute;
+  top: 490px;
+  left: 20px;
+  width: 66%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.bottom-box {
+  width: 48%;
+  height: calc(100vh - 510px);
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+  padding: 24px;
+}
+
+#clean-box {
+  position: relative; /* for popup positioning */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.clean-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size: 20px;
+  font-weight:bold;
+}
+
+.system-title{
+  font-size: 24px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.arrow{
+  cursor:pointer;
+  font-size:24px;
+  transition: transform 0.25s ease;
+  user-select:none;
+}
+
+.arrow.open{
+  transform: rotate(90deg);
+}
+
+/* Popup window */
+.clean-popup{
+  position:absolute;
+  top:45%;
+  left:100%;
+  transform: translateY(-50%) translateX(-10px);
+  width:260px;
+  background:white;
+  border-radius:16px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.15);
+  padding:18px;
+  opacity:0;
+  pointer-events:none;
+  transition: all 0.25s ease;
+  z-index:1000;
+}
+
+.clean-popup.open{
+  opacity:1;
+  transform: translateY(-50%) translateX(10px);
+  pointer-events:auto;
+}
+
+.clean-popup h3{
+  margin-top:0;
+  margin-bottom:10px;
+}
+
+.clean-popup ul{
+  margin:0;
+  padding-left:18px;
+  font-size:20px;
+}
+
+.right-lower-container {
+  width: 49%;
+  height: calc(100vh - 510px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.left-lower-container{
+width:49%;
+height: calc(100vh - 510px);
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.small-bottom-box {
+  width: 100%;
+  height: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Stage lines */
+.bar-stage-line {
+  position: absolute;
+  width: 100%;
+  border-top: 2px dotted #555;
+  pointer-events: none;
+  z-index: 2; /* above bar-fill */
+}
+
+.bar-stage-label {
+  color: #555;
+  font-weight: bold;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.top-right-box {
+  position: absolute;
+  top: 20px;
+  left: calc(66% + 40px); /* aligns with right-third box */
+  right: 20px;
+  height: 35%;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  font-size: 15px;
+}
+
+.top-right-box h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.top-right-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.top-right-box li {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.graph-container{
+  position:absolute;
+  top:40%;
+  left:calc(66% + 40px);
+  right:20px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.graph-box{
+  flex:1;
+  min-height:0;
+  background:white;
+  border-radius:18px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+}
+
+.graph-box h3{
+  margin:0 0 10px 0;
+  font-size:20px;
+}
+
+canvas{
+  width:100%;
+  flex:1;
+  min-height:0;
+}

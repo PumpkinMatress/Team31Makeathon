@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Monitor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Connection Status -->
+  <p class="status">
+    Status: <span id="connection">Disconnected</span>
+  </p>
+
+  <!-- Main Value Bars -->
+  <div class="values-container">
+
+    <div class="value-box">
+      <h2>TDS (PPM)</h2>
+      <div class="bar-area">
+        <div class="bar-track">
+          <div class="bar-fill" id="ppm-bar"></div>
+        </div>
+      </div>
+      <span id="ppm">0</span>
+    </div>
+
+    <div class="value-box">
+      <h2>Turbidity (NTU)</h2>
+      <div class="bar-area">
+        <div class="bar-track">
+          <div class="bar-fill" id="ntu-bar"></div>
+        </div>
+      </div>
+      <span id="ntu">0</span>
+    </div>
+
+    <div class="value-box usage-box">
+  <h2>Water Destination</h2>
+  <div class="jug-area">
+    <div class="jug-outline">
+      <div class="jug-fill wastewater-fill" id="wastewater-fill"></div>
+      <div class="jug-fill stage3-fill" id="stage3-fill"></div>
+      <div class="jug-fill stage2-fill" id="stage2-fill"></div>
+    </div>
+  </div>
+
+<div class="jug-legend">
+
+  <div class="legend-row">
+    <span class="legend-color stage2-color"></span>
+    <span>Drinking Water</span>
+    <span id="stage2-percent">0%</span>
+  </div>
+
+  <div class="legend-row">
+    <span class="legend-color stage3-color"></span>
+    <span>Agricultural Water</span>
+    <span id="stage3-percent">0%</span>
+  </div>
+
+  <div class="legend-row">
+    <span class="legend-color wastewater-color"></span>
+    <span>Wastewater</span>
+    <span id="wastewater-percent">0%</span>
+  </div>
+
+</div>
+
+  </div>
+
+  </div>
+
+<div class="bottom-container">
+
+  <div class="left-lower-container">
+    <div class="bottom-box small-bottom-box" id="clean-box">
+      <div class="system-title">SYSTEM STATUS</div>
+      <div class="clean-header">
+        Contamination: <span id="clean">Yes</span>
+        <span class="arrow" id="clean-arrow">▶</span>
+      </div>
+      <div class="clean-popup" id="clean-popup">
+        <h3>Water Quality Levels</h3>
+        <ul>
+          <li><b>Pure</b> – Reusable for Rinsing</li>
+          <li><b>Low</b> – Drinkable Water</li>
+          <li><b>Moderate</b> – Agricultural Uses</li>
+          <li><b>High</b> – Unsafe for Consumption/Use</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom-box small-bottom-box">
+      <div>Flow Destination:</div>
+      <span id="flow-direction">Pure</span>
+    </div>
+  </div>
+
+  <div class="right-lower-container">
+    <div class="bottom-box small-bottom-box">
+      <div>Time this Cycle</div>
+      <span id="time">12:34:56</span>
+    </div>
+    <div class="bottom-box small-bottom-box">
+      <div>Semiconductor Clean?</div>
+      <span id="active">Y</span>
+    </div>
+  </div>
+
+</div>
+
+  <div class="graph-container">
+  <div class="graph-box">
+    <h3>TDS History</h3>
+    <canvas id="ppmChart"></canvas>
+  </div>
+
+  <div class="graph-box">
+    <h3>Turbidity History</h3>
+    <canvas id="ntuChart"></canvas>
+  </div>
+  </div>
+
+<div class="top-right-box" id="top-right-box">
+  <h3>Statistics</h3>
+  <ul>
+
+    <li>Total Time Saved by Variable Rinse Timing: <span id="total-time">0 min</span></li>
+    <li>Total Water Usage Reduced by Variable Rinse Timing: <span id="total-water">0 L</span></li>
+    <li>Total Worth of Reduced Water Usage: <span id="total-money">$0.00</span></li>
+    <li>No. of Cycles: <span id="num-cycles">0</span></li>
+    <li>Drinking Water Recycled: <span id="recycled-stage2">0.0 L</span></li>
+    <li>Agricultural Water Recycled: <span id="recycled-stage3">0.0 L</span></li>
+    <li>Total Water Used: <span id="total-usage">0.0 L</span></li>
+  </ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+
+</body>
+</html>
